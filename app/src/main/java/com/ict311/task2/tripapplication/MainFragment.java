@@ -25,6 +25,7 @@ public class MainFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,8 +36,8 @@ public class MainFragment extends Fragment {
         ArrayList<Trip> tripList = db.getAllTrips();
 
         ListView listView = (ListView) v.findViewById(R.id.tripList);
-        if(tripList.size()>0)
-        listView.setAdapter(new CustomListAdapter( getActivity(),tripList ));
+        if (tripList.size() > 0)
+            listView.setAdapter(new CustomListAdapter(getActivity(), tripList));
 
         Button logBtn = (Button) v.findViewById(R.id.logBtn);
         Button settingBtn = (Button) v.findViewById(R.id.settingBtn);
@@ -48,7 +49,7 @@ public class MainFragment extends Fragment {
                 startActivity(intent);
             }
         });
-  settingBtn.setOnClickListener(new View.OnClickListener() {
+        settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SettingsActivity.class);
@@ -58,8 +59,7 @@ public class MainFragment extends Fragment {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, final View view,int position, long id)
-            {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 String tripID = ((TextView) view.findViewById(R.id.tripID))
                         .getText().toString();
 

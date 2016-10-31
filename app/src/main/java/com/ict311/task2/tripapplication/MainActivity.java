@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends FragmentActivity {
     private static final String TAG = "MainActivity";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

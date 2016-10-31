@@ -27,36 +27,37 @@ public class SettingsActivity extends FragmentActivity {
             ft.commit();
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
         Fragment fm = getSupportFragmentManager().findFragmentByTag(TAG);
 
-        if(fm!=null)
-        if(fm.isVisible()) {
-            View v = fm.getView();
+        if (fm != null)
+            if (fm.isVisible()) {
+                View v = fm.getView();
 
-            String gender;
-            EditText name = (EditText) v.findViewById(R.id.name);
-            EditText idSetting = (EditText) v.findViewById(R.id.UserIDSetting);
-            EditText email = (EditText) v.findViewById(R.id.emailID);
-            EditText comment = (EditText) v.findViewById(R.id.comment);
-            RadioGroup radioGenderGroup = (RadioGroup) v.findViewById(R.id.radioGender);
-            int selectedGenderId = radioGenderGroup.getCheckedRadioButtonId();
+                String gender;
+                EditText name = (EditText) v.findViewById(R.id.name);
+                EditText idSetting = (EditText) v.findViewById(R.id.UserIDSetting);
+                EditText email = (EditText) v.findViewById(R.id.emailID);
+                EditText comment = (EditText) v.findViewById(R.id.comment);
+                RadioGroup radioGenderGroup = (RadioGroup) v.findViewById(R.id.radioGender);
+                int selectedGenderId = radioGenderGroup.getCheckedRadioButtonId();
 
-            // find the radiobutton by returned id
-            RadioButton radioGenderButton = (RadioButton) v.findViewById(selectedGenderId);
+                // find the radiobutton by returned id
+                RadioButton radioGenderButton = (RadioButton) v.findViewById(selectedGenderId);
 
-            if (radioGenderButton.getText().equals("Male"))
-                gender = "Male";
-            else
-                gender = "Female";
+                if (radioGenderButton.getText().equals("Male"))
+                    gender = "Male";
+                else
+                    gender = "Female";
 
-            DatabaseHelper db = new DatabaseHelper(this);
-            db.updateSetting(name.getText().toString(), Integer.parseInt(idSetting.getText().toString()), email.getText().toString(), gender, comment.getText().toString());
+                DatabaseHelper db = new DatabaseHelper(this);
+                db.updateSetting(name.getText().toString(), Integer.parseInt(idSetting.getText().toString()), email.getText().toString(), gender, comment.getText().toString());
 
-        }
+            }
     }
 
 }

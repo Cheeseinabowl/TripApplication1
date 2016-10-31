@@ -26,7 +26,8 @@ import java.util.Locale;
 public class LogActivity extends FragmentActivity {
     private static final int CAMERA_REQUEST = 1888;
     private static final String TAG = "LogActivity";
-     FragmentTransaction ft=null;
+    FragmentTransaction ft = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,16 +39,18 @@ public class LogActivity extends FragmentActivity {
 
 
     }
+
     /**
      * On activity result
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-         Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG);
-         fragment.onActivityResult(requestCode, resultCode, data);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
+        fragment.onActivityResult(requestCode, resultCode, data);
 
     }
+
     @Override
     public void onBackPressed() {
         // Write your code here

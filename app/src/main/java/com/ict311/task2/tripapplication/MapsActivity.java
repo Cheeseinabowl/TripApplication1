@@ -15,13 +15,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity {
-int tripID;
+    int tripID;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-DatabaseHelper db;
+    DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db=new DatabaseHelper(this);
-        tripID=Integer.parseInt(getIntent().getStringExtra("tripID"));
+        db = new DatabaseHelper(this);
+        tripID = Integer.parseInt(getIntent().getStringExtra("tripID"));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
@@ -69,17 +70,16 @@ DatabaseHelper db;
      */
     private void setUpMap() {
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-        double lat=db.getTripLatitude(tripID);
-        double longi=db.getTripLongitude(tripID);
+        double lat = db.getTripLatitude(tripID);
+        double longi = db.getTripLongitude(tripID);
         List<Address> geoCodeMatches = null;
         try {
-            geoCodeMatches = new Geocoder(this).getFromLocation(lat,longi,1);
+            geoCodeMatches = new Geocoder(this).getFromLocation(lat, longi, 1);
 
 
-            double latitude=0.0;
-            double longitude=0.0;
-            if (!geoCodeMatches.isEmpty())
-            {
+            double latitude = 0.0;
+            double longitude = 0.0;
+            if (!geoCodeMatches.isEmpty()) {
                 latitude = geoCodeMatches.get(0).getLatitude();
                 longitude = geoCodeMatches.get(0).getLongitude();
             }

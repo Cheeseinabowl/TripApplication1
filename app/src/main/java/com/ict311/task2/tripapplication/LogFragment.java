@@ -29,7 +29,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-public class LogFragment  extends Fragment {
+public class LogFragment extends Fragment {
     EditText titleEditText;
     EditText dateEditText;
     Spinner spinner;
@@ -41,8 +41,9 @@ public class LogFragment  extends Fragment {
     DatabaseHelper db;
     byte imageInByte[];
     TextView currentLoc;
-    double latitude=0;
-    double longitude=0;
+    double latitude = 0;
+    double longitude = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +62,17 @@ public class LogFragment  extends Fragment {
         durationEditText = (EditText) v.findViewById(R.id.duration);
         commentEditText = (EditText) v.findViewById(R.id.comment);
         spinner = (Spinner) v.findViewById(R.id.type);
-        photoImg =(ImageView) v.findViewById(R.id.photo);
-        currentLoc=(TextView) v.findViewById(R.id.gpsLocation);
+        photoImg = (ImageView) v.findViewById(R.id.photo);
+        currentLoc = (TextView) v.findViewById(R.id.gpsLocation);
         GPSTracker gps = new GPSTracker(getActivity());
-        if(gps.canGetLocation()){
+        if (gps.canGetLocation()) {
 
             latitude = gps.getLatitude();
-             longitude = gps.getLongitude();
-            currentLoc.setText("Current GPS Location: Latitude : "+latitude+ " Longitude : "+longitude);
+            longitude = gps.getLongitude();
+            currentLoc.setText("Current GPS Location: Latitude : " + latitude + " Longitude : " + longitude);
             // \n is for new line
 
-        }else{
+        } else {
             // can't get location
             // GPS or Network is not enabled
             // Ask user to enable GPS/network in settings
@@ -109,19 +110,19 @@ public class LogFragment  extends Fragment {
                 getActivity(), R.array.tripType, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-Button takePhoto=(Button) v.findViewById(R.id.photoBtn);
+        Button takePhoto = (Button) v.findViewById(R.id.photoBtn);
         takePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callCamera();
             }
         });
-        Button submit=(Button) v.findViewById(R.id.submit);
+        Button submit = (Button) v.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                db.addTrip(new Trip(titleEditText.getText().toString(), dateEditText.getText().toString(), spinner.getSelectedItem().toString(), destinationEditText.getText().toString(), durationEditText.getText().toString(), commentEditText.getText().toString(), imageInByte,latitude,longitude));
+                db.addTrip(new Trip(titleEditText.getText().toString(), dateEditText.getText().toString(), spinner.getSelectedItem().toString(), destinationEditText.getText().toString(), durationEditText.getText().toString(), commentEditText.getText().toString(), imageInByte, latitude, longitude));
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle(" Submit Results ");
                 builder.setMessage("Trip information is saved successfully")
@@ -129,8 +130,8 @@ Button takePhoto=(Button) v.findViewById(R.id.photoBtn);
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 titleEditText.setText("");
-                                dateEditText .setText("");
-                                destinationEditText .setText("");
+                                dateEditText.setText("");
+                                destinationEditText.setText("");
                                 durationEditText.setText("");
                                 commentEditText.setText("");
                                 spinner.setSelection(0);
@@ -138,26 +139,26 @@ Button takePhoto=(Button) v.findViewById(R.id.photoBtn);
                             }
                         });
                 AlertDialog alert = builder.create();
-               alert.show();
+                alert.show();
 
 
             }
         });
-        Button cancel=(Button) v.findViewById(R.id.cancel);
+        Button cancel = (Button) v.findViewById(R.id.cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(getActivity(), MainActivity.class);
-                 startActivity(intent);
+                startActivity(intent);
 
             }
         });
 
         return v;
     }
-    public void callCamera()
-    {
+
+    public void callCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         getActivity().startActivityForResult(intent, CAMERA_REQUEST);
         intent.setType("image/*");
@@ -166,7 +167,6 @@ Button takePhoto=(Button) v.findViewById(R.id.photoBtn);
         intent.putExtra("aspectY", 0);
         intent.putExtra("outputX", 250);
         intent.putExtra("outputY", 200);
-
 
 
     }
@@ -184,7 +184,7 @@ Button takePhoto=(Button) v.findViewById(R.id.photoBtn);
                     // convert bitmap to byte
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     yourImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                    imageInByte= stream.toByteArray();
+                    imageInByte = stream.toByteArray();
                     ByteArrayInputStream imageStream = new ByteArrayInputStream(imageInByte);
                     Bitmap theImage = BitmapFactory.decodeStream(imageStream);
                     photoImg.setImageBitmap(theImage);

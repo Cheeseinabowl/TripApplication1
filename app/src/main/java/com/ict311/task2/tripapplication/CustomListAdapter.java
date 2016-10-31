@@ -19,11 +19,13 @@ import java.util.ArrayList;
 
 public class CustomListAdapter extends BaseAdapter {
 
-    /*********** Declare Used Variables *********/
+    /***********
+     * Declare Used Variables
+     *********/
     private Activity activity;
     private ArrayList data;
 
-    Trip tempValues=null;
+    Trip tempValues = null;
     public TextView tripID;
     public TextView tripTitle;
     public TextView tripDate;
@@ -32,23 +34,26 @@ public class CustomListAdapter extends BaseAdapter {
     public TextView tripDuration;
     public TextView tripComment;
     public ImageView tripPhoto;
-    int i=0;
+    int i = 0;
 
-    /*************  CustomAdapter Constructor *****************/
+    /*************
+     * CustomAdapter Constructor
+     *****************/
     public CustomListAdapter(Activity a, ArrayList d) {
 
         /********** Take passed values **********/
         activity = a;
-        data=d;
-
+        data = d;
 
 
     }
 
-    /******** What is the size of Passed Arraylist Size ************/
+    /********
+     * What is the size of Passed Arraylist Size
+     ************/
     public int getCount() {
 
-        if(data.size()<=0)
+        if (data.size() <= 0)
             return 1;
         return data.size();
     }
@@ -64,16 +69,16 @@ public class CustomListAdapter extends BaseAdapter {
     /********* Create a holder Class to contain inflated xml file elements *********/
 
 
-
-
-    /****** Depends upon data size called for each row , Create each ListView row *****/
+    /******
+     * Depends upon data size called for each row , Create each ListView row
+     *****/
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) activity
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.list_item, null);
 
-        if(data.size()>0) {
+        if (data.size() > 0) {
             tripID = (TextView) convertView.findViewById(R.id.tripID);
             tripTitle = (TextView) convertView.findViewById(R.id.tripTitle);
             tripDate = (TextView) convertView.findViewById(R.id.tripDate);
@@ -94,10 +99,10 @@ public class CustomListAdapter extends BaseAdapter {
             tripTitle.setText(tempValues.getTripTitle());
             tripDate.setText(tempValues.getTripDate());
             tripType.setText(tempValues.getTripType() + " Trip");
-            tripDestination.setText("Destination : "+tempValues.getTripDestination());
+            tripDestination.setText("Destination : " + tempValues.getTripDestination());
 
-            tripDuration.setText("Duration : " +tempValues.getTripDuration());
-            tripComment.setText("Comment : " +tempValues.getTripComment());
+            tripDuration.setText("Duration : " + tempValues.getTripDuration());
+            tripComment.setText("Comment : " + tempValues.getTripComment());
             byte[] outImage = tempValues.getTripPhoto();
             if (outImage != null) {
                 ByteArrayInputStream imageStream = new ByteArrayInputStream(outImage);

@@ -22,6 +22,7 @@ public class SettingsFragment extends Fragment {
     EditText comment;
     RadioGroup radioGenderGroup;
     View v;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +33,20 @@ public class SettingsFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_settings, container, false);
         db = new DatabaseHelper(getActivity());
-        Setting s=db.getSetting();
-         name= (EditText) v.findViewById(R.id.name);
-         idSetting= (EditText) v.findViewById(R.id.UserIDSetting);
-         email= (EditText) v.findViewById(R.id.emailID);
-         comment= (EditText) v.findViewById(R.id.comment);
+        Setting s = db.getSetting();
+        name = (EditText) v.findViewById(R.id.name);
+        idSetting = (EditText) v.findViewById(R.id.UserIDSetting);
+        email = (EditText) v.findViewById(R.id.emailID);
+        comment = (EditText) v.findViewById(R.id.comment);
         radioGenderGroup = (RadioGroup) v.findViewById(R.id.radioGender);
         name.setText(s.name);
 
-        String st= String.valueOf(s.ID);
+        String st = String.valueOf(s.ID);
         idSetting.setText(String.valueOf(s.ID));
         email.setText(s.email);
         comment.setText(s.comment);
-        if(s.gender.equals("Male"))
-        radioGenderGroup.check(R.id.radioMale);
+        if (s.gender.equals("Male"))
+            radioGenderGroup.check(R.id.radioMale);
         else
             radioGenderGroup.check(R.id.radioFemale);
 

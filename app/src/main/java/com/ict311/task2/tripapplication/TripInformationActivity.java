@@ -20,20 +20,21 @@ import java.io.ByteArrayOutputStream;
 
 public class TripInformationActivity extends FragmentActivity {
     private static final String TAG = "TripInformationActivity";
-    FragmentTransaction ft=null;
+    FragmentTransaction ft = null;
     int TripID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-         TripID = Integer.parseInt(intent.getStringExtra("tripID"));
+        TripID = Integer.parseInt(intent.getStringExtra("tripID"));
 
 
         if (getSupportFragmentManager().findFragmentByTag(TAG) == null) {
             Bundle bundle = new Bundle();
-              bundle.putString("tripID", String.valueOf(TripID) );
+            bundle.putString("tripID", String.valueOf(TripID));
             ft = getSupportFragmentManager().beginTransaction();
-            TripInformationFragment tif= new TripInformationFragment();
+            TripInformationFragment tif = new TripInformationFragment();
             tif.setArguments(bundle);
             ft.add(android.R.id.content, tif, TAG);
             ft.commit();
@@ -46,8 +47,8 @@ public class TripInformationActivity extends FragmentActivity {
 
         Fragment fm = getSupportFragmentManager().findFragmentByTag(TAG);
 
-        if(fm!=null)
-            if(fm.isVisible()) {
+        if (fm != null)
+            if (fm.isVisible()) {
                 View v = fm.getView();
                 EditText titleEditText = (EditText) v.findViewById(R.id.title);
                 EditText dateEditText = (EditText) v.findViewById(R.id.date);
@@ -55,7 +56,7 @@ public class TripInformationActivity extends FragmentActivity {
                 EditText durationEditText = (EditText) v.findViewById(R.id.duration);
                 EditText commentEditText = (EditText) v.findViewById(R.id.comment);
                 Spinner spinner = (Spinner) v.findViewById(R.id.type);
-               ImageView photoImg =(ImageView) v.findViewById(R.id.photo);
+                ImageView photoImg = (ImageView) v.findViewById(R.id.photo);
                 DatabaseHelper db = new DatabaseHelper(this);
                 photoImg.setBackgroundResource(0);
                 photoImg.setDrawingCacheEnabled(true);
@@ -76,10 +77,11 @@ public class TripInformationActivity extends FragmentActivity {
                 startActivity(intent);
             }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        Fragment fragment=getSupportFragmentManager().findFragmentByTag(TAG);
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG);
         fragment.onActivityResult(requestCode, resultCode, data);
 
     }
